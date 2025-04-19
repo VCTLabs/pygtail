@@ -1,0 +1,47 @@
+{% set name = "pygtail" %}
+{% set version = "3.5.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ..
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+  noarch: python
+  entry_points:
+    - pygtail = pygtail.core:main
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+    - setuptools-scm
+
+  run:
+    - python >=3.6
+    - setuptools-scm
+
+test:
+  imports:
+    - pygtail
+
+  commands:
+    - pygtail
+
+
+about:
+  home: https://github.com/sarnold/pygtail
+  license: LGPL-2.1-or-later
+  license_file: ../LICENSE
+  summary: binhex in python with a simple API
+  doc_url: "https://github.com/sarnold/pygtail/blob/main/README.rst"
+  dev_url: "https://github.com/sarnold/pygtail"
+
+
+extra:
+  recipe-maintainers:
+    - sarnold
