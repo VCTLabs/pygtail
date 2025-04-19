@@ -10,6 +10,7 @@ import shutil
 import tempfile
 import gzip
 import io
+import pytest
 
 from pygtail import Pygtail
 
@@ -35,6 +36,7 @@ class PygtailTest(unittest.TestCase):
         fh.write(str)
         fh.close()
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def copytruncate(self):
         shutil.copyfile(self.logfile.name, "%s.1" % self.logfile.name)
         fh = open(self.logfile.name, "w")
@@ -75,6 +77,7 @@ class PygtailTest(unittest.TestCase):
         new_pygtail = Pygtail(self.logfile.name, read_from_end=True)
         self.assertEqual(new_pygtail.read(), new_lines)
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_logrotate_without_delay_compress(self):
         new_lines = ["4\n5\n", "6\n7\n"]
         pygtail = Pygtail(self.logfile.name)
@@ -95,6 +98,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name)
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_logrotate_with_delay_compress(self):
         new_lines = ["4\n5\n", "6\n7\n"]
         pygtail = Pygtail(self.logfile.name)
@@ -105,6 +109,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name)
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_logrotate_with_dateext_with_delaycompress(self):
         new_lines = ["4\n5\n", "6\n7\n"]
         pygtail = Pygtail(self.logfile.name)
@@ -115,6 +120,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name)
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_logrotate_with_dateext_without_delaycompress(self):
         new_lines = ["4\n5\n", "6\n7\n"]
         pygtail = Pygtail(self.logfile.name)
@@ -135,6 +141,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name)
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_logrotate_with_dateext2_with_delaycompress(self):
         new_lines = ["4\n5\n", "6\n7\n"]
         pygtail = Pygtail(self.logfile.name)
@@ -145,6 +152,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name)
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_logrotate_with_dateext2_without_delaycompress(self):
         new_lines = ["4\n5\n", "6\n7\n"]
         pygtail = Pygtail(self.logfile.name)
@@ -165,6 +173,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name)
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_timed_rotating_file_handler(self):
         new_lines = ["4\n5\n", "6\n7\n"]
         pygtail = Pygtail(self.logfile.name)
@@ -175,6 +184,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name)
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_custom_rotating_file_handler_with_prepend(self):
         new_lines = ["4\n5\n", "6\n7\n"]
         pygtail = Pygtail(self.logfile.name)
@@ -186,6 +196,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name, log_patterns=["custom_log_pattern.%s"])
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_copytruncate_off_smaller(self):
         self.test_readlines()
         self.copytruncate()
@@ -201,6 +212,7 @@ class PygtailTest(unittest.TestCase):
         assert_class(captured_value, r".*?\bWARN\b.*?\bshrank\b.*")
         self.assertEqual(pygtail.read(), None)
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_copytruncate_on_smaller(self):
         self.test_readlines()
         self.copytruncate()
@@ -209,6 +221,7 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name, copytruncate=True)
         self.assertEqual(pygtail.read(), new_lines)
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def _test_copytruncate_larger(self, onoff):
         self.test_readlines()
         self.copytruncate()
@@ -218,9 +231,11 @@ class PygtailTest(unittest.TestCase):
         pygtail = Pygtail(self.logfile.name, copytruncate=onoff)
         self.assertEqual(pygtail.read(), new_lines)
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_copytruncate_larger_off(self):
         self._test_copytruncate_larger(False)
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_copytruncate_larger_on(self):
         self._test_copytruncate_larger(True)
 
@@ -294,6 +309,7 @@ class PygtailTest(unittest.TestCase):
         for line in pygtail:
             previous_lines += 1
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_renamecreate(self):
         """
         Tests "renamecreate" semantics where the currently processed file gets renamed and the
@@ -309,6 +325,7 @@ class PygtailTest(unittest.TestCase):
         self.append(new_lines[1])
         self.assertEqual(pygtail.read(), ''.join(new_lines))
 
+    @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
     def test_renamecreate_unknown_rotated_name(self):
         """
         Tests "renamecreate" semantics where the currently processed file gets renamed and the
