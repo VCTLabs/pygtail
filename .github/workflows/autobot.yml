@@ -29,6 +29,6 @@ jobs:
         if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' }}
         run: gh pr review --approve "${PR_URL}"
 
-      - name: Enable auto-approve for Dependabot PRs
+      - name: Enable auto-merge for Dependabot PRs
         if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' }}
         run: gh pr merge --squash --auto "${PR_URL}" || gh pr merge --merge --auto "${PR_URL}" || gh pr merge --rebase --auto "${PR_URL}"
