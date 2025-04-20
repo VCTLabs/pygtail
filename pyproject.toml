@@ -13,9 +13,7 @@ readme = "README.rst"
 
 # legacy license bits and new both fail in different versions
 # need workaround until PEP639 has more backend support
-# for now, do not use files format for better compatibility
-# license = "GPLv2-or-later"
-license = {text = "GPLv2"}
+license = "GPL-2.0-or-later"
 #license-files = [
 #    "LICENSE",
 #]
