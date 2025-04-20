@@ -9,7 +9,7 @@ source:
   path: ..
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
   noarch: python
   entry_points:
@@ -30,7 +30,7 @@ test:
     - pygtail
 
   commands:
-    - pygtail
+    - pygtail --version
 
 
 about:
