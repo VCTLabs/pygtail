@@ -12,11 +12,9 @@ dynamic = ["version"]
 readme = "README.rst"
 
 # legacy license bits and new both fail in different versions
-# need workaround until PEP639 has more backend support
-license = "GPL-2.0-or-later"
-#license-files = [
-#    "LICENSE",
-#]
+# need workaround for less than 3.9
+#license = "GPL-2.0-or-later"
+license = {"text" = "GPL v2"}
 
 authors = [
     {name = "Brad Greenlee"},
@@ -60,7 +58,7 @@ cov = [
 doc = [
     "sphinx",
     "sphinx_git",
-    "sphinx-autoapi",
+    "sphinxcontrib.apidoc",
     "sphinx_rtd_theme",
     "recommonmark",
 ]

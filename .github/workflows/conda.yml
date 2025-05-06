@@ -2,7 +2,7 @@ name: Conda
 
 on:
   workflow_dispatch:
-  #pull_request:
+  # pull_request:
   push:
     branches:
       - main
@@ -37,10 +37,10 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: ${{ matrix.python-version }}
-          channels: conda-forge
-          channel-priority: flexible
+          channels: conda-forge,defaults
+          channel-priority: strict
+          conda-remove-defaults: true
           use-only-tar-bz2: true
-          auto-activate-base: true
 
       - name: Prepare
         run: conda install conda-build conda-verify
