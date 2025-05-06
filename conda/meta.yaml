@@ -1,5 +1,5 @@
 {% set name = "pygtail" %}
-{% set version = "3.5.1" %}
+{% set version = "0.14.0" %}
 
 package:
   name: {{ name|lower }}
@@ -17,27 +17,26 @@ build:
 
 requirements:
   host:
-    - python >=3.6
+    - python >=3.9
     - pip
     - setuptools-scm
 
   run:
     - python >=3.6
-    - setuptools-scm
 
 test:
   imports:
     - pygtail
 
   commands:
-    - pygtail --version
+    - python -m unittest discover -s pygtail
 
 
 about:
   home: https://github.com/sarnold/pygtail
   license: LGPL-2.1-or-later
   license_file: ../LICENSE
-  summary: binhex in python with a simple API
+  summary: Reads log file lines that have not been read
   doc_url: "https://github.com/sarnold/pygtail/blob/main/README.rst"
   dev_url: "https://github.com/sarnold/pygtail"
 
