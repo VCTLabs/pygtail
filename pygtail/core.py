@@ -31,8 +31,9 @@ import glob
 import gzip
 import io
 from optparse import OptionParser
+from importlib.metadata import version as getversion
 
-__version__ = '0.14.0'
+__version__ = getversion('pygtail')
 
 
 PY3 = sys.version_info[0] == 3
