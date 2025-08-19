@@ -1,5 +1,5 @@
 {% set name = "pygtail" %}
-{% set version = "0.14.0" %}
+{% set version = "0.14.0.2" %}
 
 package:
   name: {{ name|lower }}
@@ -17,12 +17,13 @@ build:
 
 requirements:
   host:
-    - python >=3.9
+    - python >=3.6
     - pip
     - setuptools-scm
 
   run:
     - python >=3.6
+    - setuptools-scm
 
 test:
   imports:
@@ -33,12 +34,12 @@ test:
 
 
 about:
-  home: https://github.com/sarnold/pygtail
-  license: LGPL-2.1-or-later
+  home: https://github.com/VCTLabs/pygtail
+  license: GPL-2.0-or-later
   license_file: ../LICENSE
   summary: Reads log file lines that have not been read
-  doc_url: "https://github.com/sarnold/pygtail/blob/main/README.rst"
-  dev_url: "https://github.com/sarnold/pygtail"
+  doc_url: "https://github.com/VCTLabs/pygtail/blob/main/README.rst"
+  dev_url: "https://github.com/VCTLabs/pygtail"
 
 
 extra:
